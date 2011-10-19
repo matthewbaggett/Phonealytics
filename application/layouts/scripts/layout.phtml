@@ -1,0 +1,78 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Phonealytics');
+echo $this->doctype(); ?>
+<!--[if lt IE 8]><html lang="en" class="no-js ie ie7 dark"><![endif]-->
+<!--[if IE 8]><html lang="en" class="no-js ie dark"><![endif]-->
+<!--[if (gt IE 8)|!(IE)]><!-->
+<html lang="en" class="no-js dark"><!--<![endif]-->
+<head>
+<?php 
+// Add stylesheets to view
+$headLink = $this->headLink();
+$headLink->appendStylesheet($this->baseUrl().'/css/CoolWater.css');
+
+$headScript = $this->headScript();
+$headScript->prependFile($this->baseUrl()."/js/jquery-1.6.4.min.js"); 
+
+
+// Create array for the body's classes.
+if(!is_array($this->bodyClasses)){
+	$this->bodyClasses = array();
+}
+	  
+// Interogate our class from Zend, add them to arr_body_classes
+$obj_zend_instance = Zend_Controller_Front::getInstance();
+$str_controller 	= strtolower($obj_zend_instance->getRequest()->getControllerName());
+$str_module 		= strtolower($obj_zend_instance->getRequest()->getModuleName());
+$str_action 		= strtolower($obj_zend_instance->getRequest()->getActionName());
+array_push($this->bodyClasses, $str_action);
+array_push($this->bodyClasses, $str_controller);
+array_push($this->bodyClasses, $str_module);
+?>
+<?php echo $this->headMeta(); ?>
+<?php echo $this->headTitle(); ?>
+<?php echo $headLink; ?>
+<?php echo $headScript; ?>
+    
+    
+</head>
+<body class="<?php echo implode(" ",$this->bodyClasses);?>">
+<div id="wrap">
+		
+	<!--header -->
+	<div id="header">			
+				
+		<h1 id="logo-text"><a href="/">Phonealytics</a></h1>		
+		<p id="slogan">Phonealytics - Analytics of SMS usage</p>		
+			
+		<div id="header-links">
+			<p>
+			<a href="/">Home</a> | 
+			<a href="/">Contact</a> | 
+			<a href="/">Site Map</a>			
+			</p>		
+		</div>		
+						
+	</div>
+		
+	<!-- navigation -->	
+	<div  id="menu">
+		<?php include("navigation.phtml");?>
+	</div>					
+			
+	<div id="content-wrap">
+		<div id="main"><?php echo $this->layout()->content; ?></div>
+		<div id="sidebar"><?php include("sidebar.phtml");?></div>
+	</div>
+					
+	<?php include("footer.phtml");?>
+				
+	
+
+<!-- wrap ends here -->
+</div>
+
+</body>
+</html>
