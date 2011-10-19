@@ -1,0 +1,125 @@
+<?php if($this->obj_last_sms):?>
+<div class="section">
+	<h1>Usage</h1>
+	<p>
+		<b><?=ucfirst($this->obj_user->strUsername)?>'s</b> last SMS arrived at <b><?=$this->obj_last_sms->dtmRecieved?></b> and was from <b><?=$this->obj_last_sms->getAddress()->describe()?></b>. 
+		It was sync'd from the phone at <b><?=$this->obj_last_sms->dtmBackedup?></b>, 
+		<?=$this->FuzzyTime($this->obj_last_sms->dtmBackedup)?>. 
+		<?php if($this->obj_last_sms->isSweary()):?>
+		It contains <b><?=count($this->obj_last_sms->getSwearWords())?></b> swear words.
+		<?php else:?>
+		It contains <b>no</b> swearwords.
+		<?php endif;?>
+	</p>
+</div>
+<div class="section">
+	<h2>Read/Send ratio</h2>
+	<?php 
+	echo $this->GChartPie(
+		'message_send_recieve',
+		$this->arr_messages_data,
+		array(
+			'title_axis_y' => 'Type',
+			'title_axis_x' => 'Frequency',
+			'width' => 550,
+			'height' => 220,
+			'is3D' => true,
+		)
+	);
+	?>
+</div>
+<div class="section most_frequent">
+	<h2>Most frequent conversations</h2>
+	<ul class="panes">
+	<?php foreach($this->arr_most_frequent as $time_label => $arr_frequency):?>
+		<li rel="<?=str_replace("-","_",$time_label)?>">
+		<?php
+		echo $this->GChartBar(
+			'most_frequent_' . $time_label,
+			$arr_frequency,
+			array(
+				'title' => "{$time_label}",
+				'title_axis_x' => 'who',
+				'title_axis_y' => 'how often',
+				'width'=> 448,
+				'height' => 450,
+				'legend' => 'none',
+			)
+		) 
+		?>
+		</li>
+	<?php endforeach;?>
+	</ul>
+	<ul class="tabs">
+	<?php foreach($this->arr_most_frequent as $time_label => $arr_frequency):?>
+		<li rel="<?=str_replace("-","_",$time_label)?>"><a href="#"><?=$time_label?></a></li>
+	<?php endforeach;?>
+	</ul>
+	
+</div>
+
+<div class="section">
+	<h2>Most active at...</h2>
+	<?php
+		echo $this->GChartBar(
+			'active_hour',
+			$this->arr_activity_hours,
+			array(
+				'title' => "Most active hours",
+				'title_axis_x' => 'who',
+				'title_axis_y' => 'how often',
+				'width'=> 448,
+				'height' => 450,
+				'legend' => 'none',
+			)
+		) 
+	?>
+</div>
+
+<div class="section">
+	<h2>Most active on...</h2>
+	<?php
+		echo $this->GChartBar(
+			'active_day',
+			$this->arr_activity_days,
+			array(
+				'title' => "Most active days",
+				'title_axis_x' => 'who',
+				'title_axis_y' => 'how often',
+				'width'=> 448,
+				'height' => 450,
+				'legend' => 'none',
+			)
+		) 
+	?>
+</div>
+
+<div class="section">
+	<h2>Phone active at</h2>
+</div>
+
+<div class="section">
+	<h2>Swearing density</h2>
+	<?php 
+	echo $this->GChartPie(
+		'swearing_density',
+		$this->arr_swearing_density,
+		array(
+			'title_axis_y' => 'Type',
+			'title_axis_x' => 'Frequency',
+			'width' => 550,
+			'height' => 200,
+			'is3D' => true,
+		)
+	);
+	?>
+</div>
+<div class="section">
+	<h2>Favourite swearwords</h2>
+</div>
+<div class="section">
+	<p class="time">Took <?=$this->str_load_time?> sec to render</p>
+</div>
+<?php else:?>
+<h1><?=ucfirst($this->obj_user->strUsername)?> hasn't uploaded any SMS!</h1>
+<?php endif;?>

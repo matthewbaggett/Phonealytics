@@ -1,0 +1,41 @@
+#main div.section{
+	float: left;
+	display: block;
+	clear: left;
+	width: 550px;
+}
+#main div.section.most_frequent{}
+#main div.section.most_frequent ul.panes{
+	margin: 0;
+	padding: 0;
+	float: left;
+	display: block;
+	clear: left;
+	width: 448px;
+	border: 1px solid #cccccc;
+}
+#main div.section.most_frequent ul.panes li{
+	list-style: none outside none;
+}
+#main div.section.most_frequent ul.tabs{
+	margin: 0;
+	padding: 0;
+	float: left;
+	display: block;
+	width: 99px;
+}
+#main div.section.most_frequent ul.tabs li{
+	list-style: none outside none;
+	border: 1px solid #cccccc;
+	border-left: 0;
+	border-bottom: 0;
+	padding: 10px 8px;
+}
+#main div.section.most_frequent ul.tabs li.last{
+	border-bottom: 1px solid #cccccc;
+}
+#main div.section.most_frequent ul.tabs li.selected{
+	background-color: #cccccc;
+	font-weight: bold;
+}
+#main div.section.most_frequent ul.tabs li a{}

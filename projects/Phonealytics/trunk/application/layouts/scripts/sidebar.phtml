@@ -1,0 +1,17 @@
+<h2>Users</h2>
+<?php $tbl_users = new Application_Model_DbTable_Users()?>
+<ul class="sidemenu">			
+	<?php foreach($tbl_users->fetchAll() as $obj_user):?>
+	<li><a href="<?=$this->url(array('controller'=>'View', 'action'=>'usage', 'user' => $obj_user->strUsername),null,true)?>"><?=$obj_user->strUsername?></a></li>
+	<?php endforeach;?>
+</ul>	
+	
+<h2>Other Projects &amp; Links</h2>
+<ul class="sidemenu">
+	<li><a href="http://www.matthewbaggett.com/">Author's site.</a></li>
+	<li><a href="http://twitter.com/#!/matthewbaggett">Author's twitter.</a></li>
+	<li><a href="http://www.linkedin.com/pub/matthew-baggett/1b/8a2/378">Author's Linkedin.</a></li>
+	<li><a href="https://plus.google.com/u/2/100473893426320159216/posts?hl=en">Author's Google+</a></li>
+</ul>
+
+	
