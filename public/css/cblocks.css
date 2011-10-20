@@ -1,0 +1,19 @@
+.cms-page{
+	float: left;
+	display: block;
+}
+.cms-page h1{
+	float: left;
+	display: block;
+	clear: left;
+}
+.cms-page .cblocks{
+	float: left;
+	display: block;
+	clear: left;
+}
+.cms-page .cblocks .cblock{
+	float: left;
+	display: block;
+	clear: left;
+}
