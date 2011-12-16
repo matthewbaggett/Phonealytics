@@ -7,7 +7,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    $config = new Zend_Config($this->getOptions(), true);
 	    
 	    Zend_Registry::set('config', $config);
-	    Zend_Session::setOptions($config->session->toArray());
+	    if(isset($config->session)){
+	    	Zend_Session::setOptions($config->session->toArray());
+	    }
 	    return $config;
 	}
 	protected function _initRouter ()
