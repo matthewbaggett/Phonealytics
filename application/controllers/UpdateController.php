@@ -40,7 +40,7 @@ class UpdateController extends Zend_Controller_Action
 		$type				= $mail->getHeader('x-smssync-type','string');
 		$read				= $mail->getHeader('x-smssync-read','string');
 		$status				= $mail->getHeader('x-smssync-status','string');
-		$timestamp_backup	= $mail->getHeader('x-smssync-backup_time','string');
+		$timestamp_backup	= $mail->getHeader('x-smssync-backup-time','string');
 		$name				= $mail->getHeader('subject','string');
 		
 		if($mail->getHeader('content-transfer-encoding','string') == 'base64'){
